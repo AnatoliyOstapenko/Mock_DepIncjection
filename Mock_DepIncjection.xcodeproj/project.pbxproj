@@ -108,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6A7727289EDA0A00E0AD8D /* Models */,
+				BC6A772A289EDA5500E0AD8D /* Managers */,
 				BC6A7718289ECA7200E0AD8D /* Screens */,
 				BC6A7724289ED16D00E0AD8D /* Custom Views */,
 				BC6A771D289ECC4F00E0AD8D /* Extensions */,
@@ -115,7 +116,6 @@
 				BC6A76F0289EC9B100E0AD8D /* Assets.xcassets */,
 				BC6A76F2289EC9B100E0AD8D /* LaunchScreen.storyboard */,
 				BC6A76F5289EC9B100E0AD8D /* Info.plist */,
-				BC6A772A289EDA5500E0AD8D /* Managers */,
 			);
 			path = Mock_DepIncjection;
 			sourceTree = "<group>";

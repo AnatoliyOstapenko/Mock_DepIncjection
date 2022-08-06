@@ -10,17 +10,20 @@ import UIKit
 class InitialVC: UIViewController {
     
     let initialTableView = UITableView()
+    var users: [Users] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        updateUsers()
     }
     
     private func configure() {
-        view.setInitialTableView(view: view, tableView: initialTableView)
-        initialTableView.register(InitialCell.self, forCellReuseIdentifier: InitialCell.reuseID)
-        initialTableView.dataSource = self
-        initialTableView.delegate = self
+        view.setInitialTableView(view: view, tableView: initialTableView, vc: self)
+    }
+    
+    func updateUsers() {
+        
     }
 }
 

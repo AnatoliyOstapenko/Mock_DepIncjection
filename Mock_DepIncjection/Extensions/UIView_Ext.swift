@@ -13,9 +13,12 @@ extension UIView {
     
     // MARK: - InitialVC
     
-    func setInitialTableView(view: UIView, tableView: UITableView) {
+    func setInitialTableView(view: UIView, tableView: UITableView, vc: UIViewController) {
         tableView.backgroundColor = .systemBackground
         view.addSubview(tableView)
+        tableView.register(InitialCell.self, forCellReuseIdentifier: InitialCell.reuseID)
+        tableView.dataSource = vc as? InitialVC
+        tableView.delegate = vc as? InitialVC
         tableView.frame = view.bounds
     }
     
