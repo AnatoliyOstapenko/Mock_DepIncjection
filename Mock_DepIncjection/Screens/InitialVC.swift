@@ -23,18 +23,33 @@ class InitialVC: UIViewController {
     }
     
     func updateUsers() {
-        
+        NetworkManager.shared.getUsers { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let users): self.updateTableView(users: users)
+            case .failure(let error): print(String(describing: error))
+            }
+        }
+    }
+    
+    private func updateTableView(users: [Users]) {
+        if !users.isEmpty {
+            self.users = users
+            DispatchQueue.main.async {
+                self.initialTableView.reloadData()
+            }
+        }
     }
 }
 
 extension InitialVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InitialCell.reuseID, for: indexPath) as! InitialCell
-        cell.updateInitialCell(user: "Hello!")
+        cell.updateInitialCell(user: users[indexPath.row])
         return cell
     }
     

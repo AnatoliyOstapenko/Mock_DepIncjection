@@ -25,8 +25,8 @@ class InitialCell: UITableViewCell {
         contentView.setCellLabel(view: contentView, label: cellLabel)
     }
     
-    func updateInitialCell(user: String) {
-        cellLabel.text = user
+    func updateInitialCell(user: Users) {
+        cellLabel.text = user.name
     }
 
 }
