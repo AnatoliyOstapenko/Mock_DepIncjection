@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let padding: CGFloat = 4
+
 extension UIView {
     
     // MARK: - InitialVC
@@ -19,5 +21,16 @@ extension UIView {
     
     // MARK: - InitialCell
     
-    func set
+    func setCellLabel(view: UIView, label: UILabel) {
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding)
+        ])
+        
+    }
+    
 }

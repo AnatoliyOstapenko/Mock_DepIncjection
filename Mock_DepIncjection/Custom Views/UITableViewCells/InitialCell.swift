@@ -10,10 +10,11 @@ import UIKit
 class InitialCell: UITableViewCell {
     
     static let reuseID = "InitialCell"
-    let cellLabel = UILabel()
+    let cellLabel = CustomLabel(font: .systemFont(ofSize: 20))
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -21,7 +22,11 @@ class InitialCell: UITableViewCell {
     }
     
     private func configure() {
-        
+        contentView.setCellLabel(view: contentView, label: cellLabel)
+    }
+    
+    func updateInitialCell(user: String) {
+        cellLabel.text = user
     }
 
 }
