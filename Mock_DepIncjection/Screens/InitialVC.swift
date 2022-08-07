@@ -23,13 +23,24 @@ class InitialVC: UIViewController {
     }
     
     func updateUsers() {
-        NetworkManager.shared.getUsers { [weak self] result in
+        guard let url = Constants.url else { return }
+        
+        NetworkManagerSecond.init(session: URLSession.shared).getData(url: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let users): self.updateTableView(users: users)
-            case .failure(let error): print(String(describing: error))
+            case .success(let users):
+                self.updateTableView(users: users)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
+//        NetworkManager.shared.getUsers(url: url) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let users): self.updateTableView(users: users)
+//            case .failure(let error): print(error)
+//            }
+//        }
     }
     
     private func updateTableView(users: [Users]) {
@@ -52,8 +63,6 @@ extension InitialVC: UITableViewDataSource {
         cell.updateInitialCell(user: users[indexPath.row])
         return cell
     }
-    
-    
 }
 
 extension InitialVC: UITableViewDelegate {

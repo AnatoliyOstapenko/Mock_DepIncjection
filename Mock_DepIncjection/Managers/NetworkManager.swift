@@ -10,10 +10,8 @@ import Foundation
 class NetworkManager {
     
     static let shared = NetworkManager()
-    private let url = "https://jsonplaceholder.typicode.com/users"
     
-    func getUsers(completion: @escaping(Result<[Users], Error>) -> Void) {
-        guard let url = URL(string: self.url) else { return }
+    func getUsers(url: URL, completion: @escaping (Result<[Users], Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else { return }
             do {
@@ -23,4 +21,25 @@ class NetworkManager {
         }
         task.resume()
     }
+}
+
+class NetworkManagerSecond {
+    
+    private var session: NetworkSession
+    
+    init(session: NetworkSession = URLSession.shared) {
+        self.session = session
+    }
+    
+    func getData(url: URL, completion: @escaping (Result<[Users], Error>) -> Void) {
+        session.getUsers(url: url) { data, error in
+            guard let data = data, error == nil else { return }
+            do {
+                let result = try JSONDecoder().decode([Users].self, from: data)
+                completion(.success(result))
+            } catch { completion(.failure(error))}
+        }
+    }
+    
+    
 }
